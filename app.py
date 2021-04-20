@@ -3,7 +3,7 @@ import os
 load_dotenv()
 import uuid
 from flask import Flask, jsonify
-from db import db
+from infra.db import db
 
 from todos.routes import todos_module
 

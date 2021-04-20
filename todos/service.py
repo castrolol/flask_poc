@@ -1,5 +1,5 @@
 import uuid
-from db import db
+from infra.db import db
 from todos.models.Task import Task
 
 def all_todos():

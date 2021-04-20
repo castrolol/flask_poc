@@ -1,6 +1,6 @@
 import uuid
 from sqlalchemy import Column, String, Boolean 
-from db import db
+from infra.db import db
 
 class Task(db.Model):
     __tablename__ = 'tasks'

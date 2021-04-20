@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv(".env.test")
 import sqlalchemy
 import pytest
-from db import db
+from infra.db import db
 from app import app
 
 @pytest.fixture
