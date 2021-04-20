@@ -8,7 +8,6 @@ def all_todos():
 
 def create_todo(todo_dict):
     task = Task(**todo_dict)
-    task.id = uuid.UUID(task.id).bytes
 
     db.session.add(task)
     db.session.commit()
@@ -16,7 +15,7 @@ def create_todo(todo_dict):
     return task.as_dict()
 
 def update_todo(id, todo_dict):
-    todo = Task.query.filter_by(id=uuid.UUID(id).bytes).one()
+    todo = Task.query.filter_by(id=id).one()
 
     todo.name = todo_dict["name"]
     todo.color = todo_dict["color"]
