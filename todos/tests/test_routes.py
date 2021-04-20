@@ -1,5 +1,11 @@
 from todos.models.Task import Task
 
+
+def test_should_returns(client):
+    response = client.get('/')
+    assert "ok!" == response.data
+
+
 def test_should_returns_empty_list_initially(client):
     response = client.get('/todos')
     assert len(response.json['todos']) == 0

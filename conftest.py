@@ -1,16 +1,15 @@
 import os
-import tempfile
+from dotenv import load_dotenv
+load_dotenv(".env.test")
 import sqlalchemy
-
 import pytest
 from db import db
 from app import app
 
 @pytest.fixture
 def client():
-    db_fd, app.config['DATABASE'] = tempfile.mkstemp()
     app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:shopper@localhost:3306/shoppertest?charset=utf8mb4"
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")
 
     eng = sqlalchemy.create_engine(
         "mysql+pymysql://root:shopper@localhost:3306",
@@ -26,6 +25,3 @@ def client():
             yield client
             db.session.remove()
             db.drop_all()
-
-    os.close(db_fd)
-    os.unlink(app.config['DATABASE'])
