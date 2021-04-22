@@ -2,17 +2,15 @@ import uuid
 from infra.db import db
 from todos.models.Task import Task
 
+
 def all_todos():
     todos = Task.query.all()
-    return [todo.as_dict() for todo in todos]
+    return todos
 
-def create_todo(todo_dict):
-    task = Task(**todo_dict)
-
+def create_todo(task):
     db.session.add(task)
     db.session.commit()
-
-    return task.as_dict()
+    return task
 
 def update_todo(id, todo_dict):
     todo = Task.query.filter_by(id=id).one()
@@ -22,5 +20,4 @@ def update_todo(id, todo_dict):
 
     db.session.commit()
 
-    result = todo.as_dict() if todo else None
-    return result
+    return todo

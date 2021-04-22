@@ -3,7 +3,7 @@ from todos.models.Task import Task
 
 def test_should_returns(client):
     response = client.get('/')
-    assert "ok!" == response.data
+    assert b"ok" == response.data
 
 
 def test_should_returns_empty_list_initially(client):
@@ -18,8 +18,6 @@ def test_should_create_new_todo(client):
         "done": False,
         "color": "#fff"
     })
-
-    
 
     assert len(Task.query.all()) == 1
 
